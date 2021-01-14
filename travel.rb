@@ -9,7 +9,7 @@ puts <<~TEXT
 
 # コードを追記
 #プランのデータ
-travels = [
+plans = [
   {place: "沖縄旅行", price: 10000},
   {place: "北海道旅行", price: 20000},
   {place: "九州旅行", price: 15000}
@@ -22,7 +22,7 @@ while true
   break if (1..3).include?(plan_num)
   puts "1~3の番号を入力して下さい。"
 end
-chosen_plan = travels[plan_num - 1 ]
+chosen_plan = plans[plan_num - 1 ]
 
 puts "#{chosen_plan[:place]}ですね。"
 puts "何名で予約されますか？"
@@ -30,15 +30,15 @@ puts "何名で予約されますか？"
 #人数を選択
 while true
   print "人数を入力 > "
-  people_of_plan = gets.to_i
-  break if people_of_plan >= 1
+  people_num = gets.to_i
+  break if people_num >= 1
   puts "1以上を入力して下さい。"
 end
-  puts "#{people_of_plan}名ですね。"
+  puts "#{people_num}名ですね。"
 
 #合計金額
-total_price = chosen_plan[:price] * people_of_plan
-if people_of_plan >=5
+total_price = chosen_plan[:price] * people_num
+if people_num >=5
   puts "5名以上ですので10%割引となります。"
   total_price *= 0.9
 end
