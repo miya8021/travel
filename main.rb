@@ -1,44 +1,22 @@
-#character
-class Character
-  attr_accessor :name, :hp, :offense, :defense
-  def initialize(name:, hp:, offense:, defense:)
-    @name = name 
-    @hp = hp
-    @offense = offense
-    @defense = defense
-  end
-end  
+require "./methods.rb"
 
-#勇者
-class Brave < Character
-  def attack(monster)
-    puts "#{monster.name}があらわれた！"
-    puts "#{name}の攻撃！"
-    damege = (offense - monster.defense) / 2
-    monster.hp = (monster.hp - damege)
-    puts "#{monster.name}に#{damege}のダメージを与えた！"
-  end
-end
+plans = [
+  { place: "沖縄", price: 10000 },
+  { place: "北海道", price: 20000 },
+  { place: "九州", price: 15000 }
+]
 
-#モンスター
-class Monster < Character
-  def attack(brave)
-    puts "#{name}の攻撃！"
-    damege = (offense - brave.defense) / 2
-    brave.hp = (brave.hp - damege)
-    puts "#{brave.name}は#{damege}のダメージを受けた!"
-  end
-end
+#定数を設定
+FIRST_PLAN_NUM = 101  # 変更可
+LAST_PLAN_NUM = (FIRST_PLAN_NUM + plans.size) - 1  #変更不可
+DISCOUNT_STANDARD_VALUE = 3  #変更可
+DISCOUNT_RATE = 0.5 #変更可
+AFTER_DISCOUNT_RATE = 1 - DISCOUNT_RATE  #変更不可
 
-brave = Brave.new(name: "ゆうしゃ", hp: 238, offense: 203, defense: 129)
-monster = Monster.new(name: "アークデーモン", hp: 210, offense: 140, defense: 80)
-brave.attack(monster)
-monster.attack(brave)
+disp_plan(plans)
+choose_plan = choose_plan(plans)
+number_of_people = decide_number_of_people(choose_plan)
+calculate_charges(choose_plan, number_of_people)
 
-#ループ処理
-while monster.hp > 0
-  puts "#{monster.name}に、#{brave.damege}を与えた！"
-  monster.hp -= brave.damege
-end
-puts "#{monster.name}を倒した"
+
 
